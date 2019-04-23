@@ -14,7 +14,7 @@ namespace Pokemon
         static void Main(string[] args)
         {
             prepararPokemons();
-            Console.WriteLine("");
+            Console.WriteLine("mudança");
             pokemons.ForEach(p => Console.WriteLine($"{pokemons.IndexOf(p)+1} - {p.Nome} | Dano: {p.Dano} | Def: {p.Defesa} | Vida: {p.Vida}") );
             Console.ReadKey();
         }
