@@ -8,7 +8,7 @@ namespace Pokemon
 {
     class Trainers
     {
-        private int nome;
+        private string nome;
 
         private List<Pokemons> pokemons;
 
@@ -18,7 +18,7 @@ namespace Pokemon
             set { pokemons = value; }
         }
 
-        public int Nome
+        public string Nome
         {
             get { return nome; }
             set { nome = value; }

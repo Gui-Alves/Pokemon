@@ -9,14 +9,57 @@ namespace Pokemon
     class Program
     {
         private static List<Pokemons> pokemons;
-        private static List<Trainers> p1;
-        private static List<Trainers> p2;
+        
         static void Main(string[] args)
         {
+            List<Pokemons> escolha1 = new List<Pokemons>();
+            List<Pokemons> escolha2 = new List<Pokemons>();
+            List<Trainers> t = new List<Trainers>();
+            Trainers p1 = new Trainers();
+            Trainers p2 = new Trainers();
+            t.Add(p1); t.Add(p2);
+            int resp;
+
             prepararPokemons();
-            Console.WriteLine("mudança");
-            pokemons.ForEach(p => Console.WriteLine($"{pokemons.IndexOf(p)+1} - {p.Nome} | Dano: {p.Dano} | Def: {p.Defesa} | Vida: {p.Vida}") );
-            Console.ReadKey();
+            Console.WriteLine("Digite o nome do jogador 1:");
+            t[0].Nome = Console.ReadLine();
+            Console.Clear();
+            Console.WriteLine("Digite o nome do jogador 2:");
+            t[1].Nome = Console.ReadLine();
+            Console.Clear();
+
+            for (int i = 0; i < 6; i++)
+            {
+                if (i > 0)
+                {
+                    Console.WriteLine($"Pokemons de {t[0].Nome}:");
+                    t[0].Pokemons.ForEach(p => Console.WriteLine($"{p.Nome}"));
+                    Console.WriteLine();
+                    if (i > 1)
+                    {
+                        Console.WriteLine($"Pokemons de {t[1].Nome}:");
+                        t[1].Pokemons.ForEach(p => Console.WriteLine($"{p.Nome}"));
+                        Console.WriteLine();
+                    }
+                }
+                Console.WriteLine($"{t[i % 2].Nome}, escolha um pokemon: ");
+                pokemons.ForEach(p => Console.WriteLine($"{pokemons.IndexOf(p) + 1,-2}- {p.Nome,-13} | Dano: {p.Dano,-2} | Def: {p.Defesa,-2} | Vida: {p.Vida}"));
+                resp = Convert.ToInt32(Console.ReadLine());
+                if (i % 2 == 0)
+                {
+                    escolha1.Add(pokemons[resp - 1]);
+                    t[0].Pokemons = escolha1;
+                }
+                else
+                {
+                    escolha2.Add(pokemons[resp - 1]);
+                    t[1].Pokemons = escolha2;
+                }
+
+                pokemons.Remove(pokemons[resp - 1]);
+                
+                Console.Clear();
+            }
         }
 
         static void prepararPokemons()
